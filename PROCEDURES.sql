@@ -26,9 +26,7 @@ as $$
 			set status = 'completo'
 		where pagamentos.id = pagamento_id;
 
-		select p.id into pedido_id from pedidos p where p.id in (
-			select pg.pedido_id from pagamentos pg where pg.id = pagamento_id
-		);
+		select pg.pedido_id into pedido_id from pagamentos pg where pg.id = pagamento_id;
 
 		update pedidos
 			set status = 'rota_entrega'
@@ -37,3 +35,17 @@ as $$
 $$ language plpgsql;
 
 call confirmar_pagamento(4);
+
+-- Aplica um desconto de compra ao valor total de um pedido
+create or replace procedure aplicar_desconto(
+	pedido_id integer,
+	valor_desconto numeric
+) as $$
+	begin
+		update pedidos
+			set total = total - (total * (valor_desconto / 100))
+		where pedidos.id = pedido_id;
+	end;
+$$ language plpgsql;
+
+call aplicar_desconto(1, 15);
