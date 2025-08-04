@@ -12,7 +12,7 @@ create table produtos (
 	id serial primary key,
 	nome varchar(150),
 	descricao text,
-	preco decimal,
+	preco decimal(10, 2),
 	quantidade_estoque integer,
 	categoria_id integer not null,
 	
@@ -32,7 +32,7 @@ create table pedidos (
 	id serial primary key,
 	usuario_id integer not null,
 	status status_pedido not null default 'espera',
-	total decimal,
+	total decimal(10, 2),
 
 	foreign key (usuario_id) references usuarios(id)
 	on delete cascade
@@ -59,7 +59,7 @@ create table pagamentos (
 	pedido_id integer not null,
 	metodos_pagamento metodos_pagamento not null default 'pix',
 	status status_pagamento not null default 'espera',
-	valor_pagamento decimal,
+	valor_pagamento decimal(10, 2),
 
 	foreign key(pedido_id) references pedidos(id)
 	on delete cascade
