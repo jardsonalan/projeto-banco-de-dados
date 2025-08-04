@@ -1,6 +1,5 @@
--- Mostra os usuários ccom peidos em rota de entrega
-SELECT u.nome 
-FROM usuarios u 
+-- Mostra os usuários com pedidos em rota de entrega
+SELECT u.nome FROM usuarios u 
 WHERE u.id IN (SELECT p.usuario_id  
 	FROM pedidos p 
 	WHERE p.status = 'rota_entrega');
@@ -9,7 +8,7 @@ WHERE u.id IN (SELECT p.usuario_id
 SELECT u.nome, (SELECT count(p.status) 
 	FROM pedidos p 
 	WHERE p.status = 'espera' AND u.id = p.usuario_id  
-	GROUP BY p.usuario_id) AS pedidos_em_spera
+	GROUP BY p.usuario_id) AS pedidos_em_espera
 FROM usuarios u;
 
 -- Mostra o valor gasto de um usuário em específico

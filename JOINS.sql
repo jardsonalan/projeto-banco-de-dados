@@ -1,4 +1,3 @@
-
 -- 1. Listar todos os pedidos com nome do usuário e status
 SELECT 
   p.id AS pedido_id,
@@ -27,7 +26,8 @@ SELECT
   pg.status
 FROM pagamentos pg
 JOIN pedidos p ON pg.pedido_id = p.id
-JOIN usuarios u ON p.usuario_id = u.id;
+JOIN usuarios u ON p.usuario_id = u.id
+WHERE pg.status = 'completo';
 
 -- 4. Listar pedidos com endereço de entrega completo
 SELECT 
