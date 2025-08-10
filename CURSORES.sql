@@ -28,6 +28,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+SELECT * FROM verificar_pedidos_espera();
 
 -- 2. Percorre todos os pedidos com pagamentos em status "espera" e exibe: nome do usuário, 
 -- valor do pagamento pendente, e status do pedido.
@@ -69,3 +70,5 @@ BEGIN
     CLOSE cursor_pagamentos_pendentes;
 END;
 $$ LANGUAGE plpgsql;
+
+SELECT * FROM verificar_pagamentos_pendentes();
